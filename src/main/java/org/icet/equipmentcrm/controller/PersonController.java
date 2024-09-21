@@ -27,4 +27,10 @@ public class PersonController {
     public List<Person> retrieveAll(){
         return service.retrieveAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Person retrieveById(@PathVariable Long id){
+        return service.retrieveById(id);
+    }
 }

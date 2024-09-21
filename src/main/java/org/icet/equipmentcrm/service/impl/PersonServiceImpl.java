@@ -31,4 +31,9 @@ public class PersonServiceImpl implements PersonService {
         );
         return personList;
     }
+
+    @Override
+    public Person retrieveById(Long id) {
+        return new ModelMapper().map(repository.findById(id), Person.class);
+    }
 }

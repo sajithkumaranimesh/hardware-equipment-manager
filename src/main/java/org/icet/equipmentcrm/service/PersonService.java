@@ -9,4 +9,5 @@ public interface PersonService {
 
     List<Person> retrieveAll();
 
+    Person retrieveById(Long id);
 }
