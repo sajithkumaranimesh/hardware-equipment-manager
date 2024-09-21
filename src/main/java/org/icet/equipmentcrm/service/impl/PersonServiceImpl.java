@@ -8,6 +8,9 @@ import org.icet.equipmentcrm.service.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
@@ -17,5 +20,15 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void persist(Person person) {
         repository.save(new ModelMapper().map(person, PersonEntity.class));
+    }
+
+    @Override
+    public List<Person> retrieveAll() {
+        List<Person> personList = new ArrayList<>();
+        List<PersonEntity> personEntityList = repository.findAll();
+        personEntityList.forEach(personEntity ->
+            personList.add(new ModelMapper().map(personEntity, Person.class))
+        );
+        return personList;
     }
 }
