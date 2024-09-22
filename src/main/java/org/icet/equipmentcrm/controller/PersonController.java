@@ -2,8 +2,10 @@ package org.icet.equipmentcrm.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.icet.equipmentcrm.dto.Person;
+import org.icet.equipmentcrm.dto.SuccessResponse;
 import org.icet.equipmentcrm.service.PersonService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,13 @@ public class PersonController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Person> retrieveAll(){
-        return service.retrieveAll();
+    public ResponseEntity<SuccessResponse> retrieveAll(){
+        List<Person> personList = service.retrieveAll();
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .data(personList)
+                .build();
+        return ResponseEntity.ok().body(successResponse);
     }
 
     @GetMapping("/{id}")
