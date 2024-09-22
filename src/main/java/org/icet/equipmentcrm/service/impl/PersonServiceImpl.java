@@ -43,4 +43,11 @@ public class PersonServiceImpl implements PersonService {
             repository.save(new ModelMapper().map(person, PersonEntity.class));
         }
     }
+
+    @Override
+    public void deleteById(Long id) {
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }
+    }
 }

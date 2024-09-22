@@ -39,4 +39,10 @@ public class PersonController {
     public void update(@RequestBody Person person){
         service.update(person);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id){
+        service.deleteById(id);
+    }
 }

@@ -12,4 +12,6 @@ public interface PersonService {
     Person retrieveById(Long id);
 
     void update(Person person);
+
+    void deleteById(Long id);
 }
