@@ -3,6 +3,7 @@ package org.icet.equipmentcrm.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.icet.equipmentcrm.dto.Person;
 import org.icet.equipmentcrm.entity.PersonEntity;
+import org.icet.equipmentcrm.exception.PersonNotFoundException;
 import org.icet.equipmentcrm.repository.PersonRepository;
 import org.icet.equipmentcrm.service.PersonService;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +36,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person retrieveById(Long id) {
-        return new ModelMapper().map(repository.findById(id), Person.class);
+        Optional<PersonEntity> personEntity = repository.findById(id);
+        if (personEntity.isEmpty())
+            throw new PersonNotFoundException(String.format("%d No person found with this ID",id));
+        return new ModelMapper().map(personEntity, Person.class);
     }
 
     @Override
