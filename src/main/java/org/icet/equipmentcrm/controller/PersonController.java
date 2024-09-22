@@ -37,8 +37,14 @@ public class PersonController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Person retrieveById(@PathVariable Long id){
-        return service.retrieveById(id);
+    public ResponseEntity<SuccessResponse> retrieveById(@PathVariable Long id){
+        Person person = service.retrieveById(id);
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .data(person)
+                .build();
+        return ResponseEntity.ok().body(successResponse);
+
     }
 
     @PutMapping()
