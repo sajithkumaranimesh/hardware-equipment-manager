@@ -36,4 +36,11 @@ public class PersonServiceImpl implements PersonService {
     public Person retrieveById(Long id) {
         return new ModelMapper().map(repository.findById(id), Person.class);
     }
+
+    @Override
+    public void update(Person person) {
+        if (repository.findById(person.getId()).isPresent()){
+            repository.save(new ModelMapper().map(person, PersonEntity.class));
+        }
+    }
 }

@@ -33,4 +33,10 @@ public class PersonController {
     public Person retrieveById(@PathVariable Long id){
         return service.retrieveById(id);
     }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody Person person){
+        service.update(person);
+    }
 }
