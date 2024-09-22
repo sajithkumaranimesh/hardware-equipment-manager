@@ -44,9 +44,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void update(Person person) {
-        if (repository.findById(person.getId()).isPresent()){
-            repository.save(new ModelMapper().map(person, PersonEntity.class));
+        PersonEntity personEntity = new ModelMapper().map(person, PersonEntity.class);
+        if (repository.findById(person.getId()).isEmpty()){
+            throw new PersonNotFoundException(String.format("%s This person not found",person));
         }
+        repository.save(personEntity);
     }
 
     @Override
