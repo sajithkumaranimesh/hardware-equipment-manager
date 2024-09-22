@@ -53,8 +53,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void deleteById(Long id) {
-        if (repository.findById(id).isPresent()){
-            repository.deleteById(id);
+        if (repository.findById(id).isEmpty()){
+            throw new PersonNotFoundException(String.format("%d No person found with this ID",id));
         }
+        repository.deleteById(id);
     }
 }
