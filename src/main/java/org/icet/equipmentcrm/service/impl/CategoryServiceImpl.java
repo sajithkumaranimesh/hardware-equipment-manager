@@ -50,4 +50,12 @@ public class CategoryServiceImpl implements CategoryService {
         }
         repository.save(new ModelMapper().map(category, CategoryEntity.class));
     }
+
+    @Override
+    public void deleteById(Long id) {
+        if (repository.findById(id).isEmpty()){
+            throw new CategoryNotFoundException(String.format("%d No category found with this ID",id));
+        }
+        repository.deleteById(id);
+    }
 }
