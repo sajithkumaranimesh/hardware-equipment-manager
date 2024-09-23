@@ -8,6 +8,9 @@ import org.icet.equipmentcrm.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -17,5 +20,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void persist(Category category) {
         repository.save(new ModelMapper().map(category, CategoryEntity.class));
+    }
+
+    @Override
+    public List<Category> retrieveAll() {
+        List<Category> categoryList = new ArrayList<>();
+        List<CategoryEntity> categoryEntityList = repository.findAll();
+        categoryEntityList.forEach(categoryEntity -> {
+            categoryList.add(new ModelMapper().map(categoryEntity, Category.class));
+        });
+        return categoryList;
     }
 }
