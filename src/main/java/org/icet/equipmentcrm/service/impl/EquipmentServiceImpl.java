@@ -3,6 +3,7 @@ package org.icet.equipmentcrm.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.icet.equipmentcrm.dto.Equipment;
 import org.icet.equipmentcrm.entity.EquipmentEntity;
+import org.icet.equipmentcrm.exception.EquipmentNotFoundException;
 import org.icet.equipmentcrm.repository.EquipmentRepository;
 import org.icet.equipmentcrm.service.EquipmentService;
 import org.modelmapper.ModelMapper;
@@ -36,11 +37,18 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public Equipment retrieveById(Long id) {
         Optional<EquipmentEntity> equipmentEntity = repository.findById(id);
+        if (equipmentEntity.isEmpty()){
+            throw new EquipmentNotFoundException(String.format("%d No equipment found with this ID",id));
+        }
         return new ModelMapper().map(equipmentEntity, Equipment.class);
     }
 
     @Override
     public void update(Equipment equipment) {
-
+        EquipmentEntity equipmentEntity = new ModelMapper().map(equipment, EquipmentEntity.class);
+        if (repository.findById(equipment.getId()).isEmpty()){
+            throw new EquipmentNotFoundException(String.format("%s This equipment not found",equipment));
+        }
+        repository.save(equipmentEntity);
     }
 }

@@ -46,9 +46,9 @@ public class EquipmentController {
         return ResponseEntity.ok().body(successResponse);
     }
 
-//    @PutMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public void update(@RequestBody Equipment equipment){
-//        service.update(equipment);
-//    }
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody Equipment equipment){
+        service.update(equipment);
+    }
 }

@@ -17,4 +17,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
         return ResponseEntity.ok().body(errorResponse);
     }
+
+    @ExceptionHandler(EquipmentNotFoundException.class)
+    ResponseEntity<ErrorResponse> handleEquipmentNotFoundException(EquipmentNotFoundException ex){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorMessage(ex.getMessage())
+                .status("FAILED")
+                .build();
+        return ResponseEntity.ok().body(errorResponse);
+    }
 }
