@@ -3,6 +3,7 @@ package org.icet.equipmentcrm.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.icet.equipmentcrm.dto.Category;
 import org.icet.equipmentcrm.entity.CategoryEntity;
+import org.icet.equipmentcrm.exception.CategoryNotFoundException;
 import org.icet.equipmentcrm.repository.CategoryRepository;
 import org.icet.equipmentcrm.service.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,14 @@ public class CategoryServiceImpl implements CategoryService {
             categoryList.add(new ModelMapper().map(categoryEntity, Category.class));
         });
         return categoryList;
+    }
+
+    @Override
+    public Category retrieveById(Long id) {
+        Optional<CategoryEntity> categoryEntity = repository.findById(id);
+        if (categoryEntity.isEmpty()){
+            throw new CategoryNotFoundException(String.format("%d No category found with this ID",id));
+        }
+        return new ModelMapper().map(categoryEntity, Category.class);
     }
 }

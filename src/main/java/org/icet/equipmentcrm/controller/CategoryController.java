@@ -31,4 +31,14 @@ public class CategoryController {
                 .build();
         return ResponseEntity.ok().body(successResponse);
     }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<SuccessResponse> retrieveById(@PathVariable Long id){
+        Category category = service.retrieveById(id);
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .data(category)
+                .build();
+        return ResponseEntity.ok().body(successResponse);
+    }
 }
