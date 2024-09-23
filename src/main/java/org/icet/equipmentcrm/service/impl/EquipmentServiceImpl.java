@@ -51,4 +51,12 @@ public class EquipmentServiceImpl implements EquipmentService {
         }
         repository.save(equipmentEntity);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        if (repository.findById(id).isEmpty()){
+            throw new EquipmentNotFoundException(String.format("%d No equipment found with this ID",id));
+        }
+        repository.deleteById(id);
+    }
 }

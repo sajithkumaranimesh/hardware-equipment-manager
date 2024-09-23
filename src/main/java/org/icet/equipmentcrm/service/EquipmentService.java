@@ -12,4 +12,6 @@ public interface EquipmentService {
     Equipment retrieveById(Long id);
 
     void update(Equipment equipment);
+
+    void deleteById(Long id);
 }

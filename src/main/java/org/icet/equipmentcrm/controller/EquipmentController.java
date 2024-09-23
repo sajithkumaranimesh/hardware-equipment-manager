@@ -51,4 +51,10 @@ public class EquipmentController {
     public void update(@RequestBody Equipment equipment){
         service.update(equipment);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id){
+        service.deleteById(id);
+    }
 }
