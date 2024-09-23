@@ -10,4 +10,6 @@ public interface CategoryService {
     List<Category> retrieveAll();
 
     Category retrieveById(Long id);
+
+    void update(Category category);
 }

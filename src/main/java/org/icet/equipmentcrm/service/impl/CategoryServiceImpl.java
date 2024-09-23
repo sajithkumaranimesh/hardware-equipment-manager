@@ -42,4 +42,12 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return new ModelMapper().map(categoryEntity, Category.class);
     }
+
+    @Override
+    public void update(Category category) {
+        if (repository.findById(category.getId()).isEmpty()){
+            throw new CategoryNotFoundException(String.format("%s this category not found",category));
+        }
+        repository.save(new ModelMapper().map(category, CategoryEntity.class));
+    }
 }
