@@ -26,4 +26,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
         return ResponseEntity.ok().body(errorResponse);
     }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    ResponseEntity<ErrorResponse> handleCategoryNotFoundException(CategoryNotFoundException ex){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorMessage(ex.getMessage())
+                .status("FAILED")
+                .build();
+        return ResponseEntity.ok().body(errorResponse);
+    }
 }
