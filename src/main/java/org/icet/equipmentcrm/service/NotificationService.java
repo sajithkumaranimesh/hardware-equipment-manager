@@ -8,4 +8,6 @@ public interface NotificationService {
     void persist(Notification notification);
 
     List<Notification> retrieveAll();
+
+    Notification retrieveById(Long id);
 }

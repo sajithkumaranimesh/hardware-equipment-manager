@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +32,11 @@ public class NotificationServiceImpl implements NotificationService {
             notificationList.add(new ModelMapper().map(notificationEntity, Notification.class))
         );
         return notificationList;
+    }
+
+    @Override
+    public Notification retrieveById(Long id) {
+        Optional<NotificationEntity> notificationEntity = repository.findById(id);
+        return new ModelMapper().map(notificationEntity, Notification.class);
     }
 }

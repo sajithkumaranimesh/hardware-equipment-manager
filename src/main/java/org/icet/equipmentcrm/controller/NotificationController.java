@@ -33,4 +33,15 @@ public class NotificationController {
                 .build();
         return ResponseEntity.ok().body(successResponse);
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<SuccessResponse> retrieveById(@PathVariable Long id){
+        Notification notification = service.retrieveById(id);
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .data(notification)
+                .build();
+        return ResponseEntity.ok().body(successResponse);
+    }
 }
