@@ -44,4 +44,16 @@ public class NotificationController {
                 .build();
         return ResponseEntity.ok().body(successResponse);
     }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody Notification notification){
+        service.update(notification);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void  deleteById(@PathVariable Long id){
+        service.deleteById(id);
+    }
 }

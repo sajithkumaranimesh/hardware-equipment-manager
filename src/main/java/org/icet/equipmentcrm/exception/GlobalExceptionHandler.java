@@ -35,4 +35,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
         return ResponseEntity.ok().body(errorResponse);
     }
+
+    @ExceptionHandler(NotificationNotFoundException.class)
+    ResponseEntity<ErrorResponse> handleNotificationNotFoundException(NotificationNotFoundException ex){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorMessage(ex.getMessage())
+                .status("FAILED")
+                .build();
+        return ResponseEntity.ok().body(errorResponse);
+    }
 }

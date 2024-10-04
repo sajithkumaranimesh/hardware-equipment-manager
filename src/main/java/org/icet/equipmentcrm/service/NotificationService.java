@@ -10,4 +10,8 @@ public interface NotificationService {
     List<Notification> retrieveAll();
 
     Notification retrieveById(Long id);
+
+    void update(Notification notification);
+
+    void deleteById(Long id);
 }
