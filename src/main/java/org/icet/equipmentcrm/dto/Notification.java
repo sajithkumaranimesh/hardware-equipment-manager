@@ -14,6 +14,6 @@ import java.util.Date;
 public class Notification {
     private Long id;
     private String message;
-    private Date sendeAt;
+    private Date sendAt;
     private Long personId;
 }

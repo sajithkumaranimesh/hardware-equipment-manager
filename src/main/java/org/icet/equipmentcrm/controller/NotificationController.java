@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -23,16 +22,6 @@ public class NotificationController {
         service.persist(notification);
     }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<SuccessResponse> retrieveAll(){
-        List<Notification> notificationList = service.retrieveAll();
-        SuccessResponse successResponse = SuccessResponse.builder()
-                .status("SUCCESS")
-                .data(notificationList)
-                .build();
-        return ResponseEntity.ok().body(successResponse);
-    }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

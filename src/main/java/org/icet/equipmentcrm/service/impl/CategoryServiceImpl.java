@@ -7,6 +7,9 @@ import org.icet.equipmentcrm.exception.CategoryNotFoundException;
 import org.icet.equipmentcrm.repository.CategoryRepository;
 import org.icet.equipmentcrm.service.CategoryService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,9 +28,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> retrieveAll() {
+    public List<Category> retrieveAll(int pageNo, int pageSize) {
         List<Category> categoryList = new ArrayList<>();
-        List<CategoryEntity> categoryEntityList = repository.findAll();
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<CategoryEntity> categoryEntityList = repository.findAll(pageable);
         categoryEntityList.forEach(categoryEntity -> {
             categoryList.add(new ModelMapper().map(categoryEntity, Category.class));
         });

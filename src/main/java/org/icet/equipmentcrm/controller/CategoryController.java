@@ -26,8 +26,8 @@ public class CategoryController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<SuccessResponse> retrieveAll(){
-        List<Category> categoryList = service.retrieveAll();
+    public ResponseEntity<SuccessResponse> retrieveAll(@RequestParam(defaultValue = "0") int pageNo, @RequestParam(defaultValue = "5") int pageSize){
+        List<Category> categoryList = service.retrieveAll(pageNo, pageSize);
         SuccessResponse successResponse = SuccessResponse.builder()
                 .status("SUCCESS")
                 .data(categoryList)

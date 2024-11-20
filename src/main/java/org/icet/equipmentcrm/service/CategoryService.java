@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoryService {
     void persist(Category category);
 
-    List<Category> retrieveAll();
+    List<Category> retrieveAll(int pageNo, int pageSize);
 
     Category retrieveById(Long id);
 

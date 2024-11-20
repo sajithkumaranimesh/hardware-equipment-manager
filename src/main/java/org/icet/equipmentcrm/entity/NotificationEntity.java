@@ -20,6 +20,6 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String message;
-    private Date sendeAt;
+    private Date sendAt;
     private Long personId;
 }

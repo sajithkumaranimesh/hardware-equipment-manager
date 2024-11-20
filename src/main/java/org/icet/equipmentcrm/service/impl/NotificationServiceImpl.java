@@ -9,8 +9,7 @@ import org.icet.equipmentcrm.service.NotificationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
@@ -25,15 +24,6 @@ public class NotificationServiceImpl implements NotificationService {
         repository.save(new ModelMapper().map(notification, NotificationEntity.class));
     }
 
-    @Override
-    public List<Notification> retrieveAll() {
-        List<Notification> notificationList = new ArrayList<>();
-        List<NotificationEntity> notificationEntityList = repository.findAll();
-        notificationEntityList.forEach(notificationEntity ->
-            notificationList.add(new ModelMapper().map(notificationEntity, Notification.class))
-        );
-        return notificationList;
-    }
 
     @Override
     public Notification retrieveById(Long id) {
