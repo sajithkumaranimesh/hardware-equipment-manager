@@ -18,5 +18,5 @@ public class Equipment {
     private Double rentalPrice;
     private Boolean availabilityStatus;
     private Date registerdDate;
-    private Long categoryId;
+    private String categoryName;
 }

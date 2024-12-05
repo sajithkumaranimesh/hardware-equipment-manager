@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.util.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +25,11 @@ public class EquipmentEntity {
     private Double rentalPrice;
     private Boolean availabilityStatus;
     private Date registerdDate;
-    private Long categoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_category_id")
+    private CategoryEntity category;
+
+    @OneToMany(mappedBy = "equipment")
+    private Set<RentalEntity> rental;
 }

@@ -62,4 +62,10 @@ public class CategoryServiceImpl implements CategoryService {
         }
         repository.deleteById(id);
     }
+
+    @Override
+    public int retrieveAllCount() {
+        long count = repository.count();
+        return (int) count;
+    }
 }

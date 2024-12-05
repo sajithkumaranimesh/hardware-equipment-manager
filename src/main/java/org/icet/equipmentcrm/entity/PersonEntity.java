@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -23,4 +24,7 @@ public class PersonEntity {
     private String email;
     private String phone;
     private String address;
+
+    @OneToMany(mappedBy = "person")
+    private Set<RentalEntity> rental;
 }

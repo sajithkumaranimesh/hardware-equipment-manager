@@ -26,13 +26,24 @@ public class CategoryController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<SuccessResponse> retrieveAll(@RequestParam(defaultValue = "0") int pageNo, @RequestParam(defaultValue = "5") int pageSize){
+    public ResponseEntity<SuccessResponse> retrieveAll(@RequestParam(defaultValue = "0") int pageNo, @RequestParam(defaultValue = "8") int pageSize){
         List<Category> categoryList = service.retrieveAll(pageNo, pageSize);
         SuccessResponse successResponse = SuccessResponse.builder()
                 .status("SUCCESS")
                 .data(categoryList)
                 .build();
         return ResponseEntity.ok().body(successResponse);
+    }
+
+    @GetMapping("/count")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<SuccessResponse> retrieveCount(){
+        int count = service.retrieveAllCount();
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .data(count)
+                .build();
+        return  ResponseEntity.ok().body(successResponse);
     }
 
     @GetMapping("/{id}")

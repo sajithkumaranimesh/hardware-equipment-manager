@@ -5,25 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.icet.equipmentcrm.dto.Equipment;
 
 import java.util.Date;
-import java.util.Set;
-
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-@Entity
-@Table(name = "category")
-public class CategoryEntity {
+@Setter
+@Table(name = "Rental")
+public class RentalEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private Date registerdDate;
+    private Date startDate;
+    private Date endDate;
+    private Double totalPrice;
 
-    @OneToMany(mappedBy = "category")
-    private Set<EquipmentEntity> equipmentSet;
+    @ManyToOne
+    @JoinColumn(name = "fk_person_id")
+    private PersonEntity person;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_equipment_id")
+    private EquipmentEntity equipment;
 }
