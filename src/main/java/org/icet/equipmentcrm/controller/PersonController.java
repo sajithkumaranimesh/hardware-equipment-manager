@@ -20,8 +20,12 @@ public class PersonController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void persist(@RequestBody Person person){
+    public ResponseEntity<SuccessResponse> persist(@RequestBody Person person){
         service.persist(person);
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .build();
+        return ResponseEntity.ok().body(successResponse);
     }
 
     @GetMapping()
@@ -47,7 +51,7 @@ public class PersonController {
 
     }
 
-    @PutMapping()
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody Person person){
         service.update(person);
@@ -55,7 +59,11 @@ public class PersonController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id){
+    public ResponseEntity<SuccessResponse> deleteById(@PathVariable Long id){
         service.deleteById(id);
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .status("SUCCESS")
+                .build();
+        return ResponseEntity.ok().body(successResponse);
     }
 }
