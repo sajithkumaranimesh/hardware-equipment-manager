@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.icet.equipmentcrm.dto.Equipment;
 import org.icet.equipmentcrm.entity.EquipmentEntity;
 import org.icet.equipmentcrm.exception.EquipmentNotFoundException;
+import org.icet.equipmentcrm.repository.CategoryRepository;
 import org.icet.equipmentcrm.repository.EquipmentRepository;
 import org.icet.equipmentcrm.service.EquipmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +20,14 @@ import java.util.Optional;
 public class EquipmentServiceImpl implements EquipmentService {
 
     private final EquipmentRepository repository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public void persist(Equipment equipment) {
-        repository.save(new ModelMapper().map(equipment, EquipmentEntity.class));
+        EquipmentEntity equipmentEntity = new ModelMapper().map(equipment, EquipmentEntity.class);
+        equipmentEntity.setCategory(categoryRepository.findByName(equipment.getCategoryName()).orElse(null));
+        equipmentEntity.setRegisterdDate(new Date());
+        repository.save(equipmentEntity);
     }
 
     @Override
