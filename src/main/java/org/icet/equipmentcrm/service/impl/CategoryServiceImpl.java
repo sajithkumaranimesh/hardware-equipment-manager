@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void persist(Category category) {
-        repository.save(new ModelMapper().map(category, CategoryEntity.class));
+        CategoryEntity categoryEntity = new ModelMapper().map(category, CategoryEntity.class);
+        categoryEntity.setRegisterdDate(new Date());
+        repository.save(categoryEntity);
     }
 
     @Override

@@ -13,7 +13,9 @@ import java.util.Date;
 @Setter
 @Getter
 public class Rental {
-    private Date startDate;
+    private Long id;
     private Date endDate;
     private Double totalPrice;
+    private String personName;
+    private String equipmentName;
 }
